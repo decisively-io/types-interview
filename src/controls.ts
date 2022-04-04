@@ -10,7 +10,7 @@ export interface IBoolean {
   id: string;
   type: 'boolean';
   label?: string;
-  required?: boolean;
+  required?: true;
   default?: boolean;
   // The GUID of the attribute
   attribute: string;
@@ -27,7 +27,7 @@ export interface ICurrency {
   id: string;
   type: 'currency';
   label?: string;
-  required?: boolean;
+  required?: true;
   default?: number;
   /** uuid */
   attribute: string;
@@ -48,19 +48,15 @@ export interface IDate {
   id: string;
   type: 'date';
   label?: string;
-  required?: boolean;
+  required?: true;
   /** uuid */
   attribute: string;
   /** YYYY-MM-DD */
   default?: string;
   /** Minimum date allowed, YYYY-MM-DD */
-  min?: string;
+  min?: string | 'now';
   /** Maximum date allowed, YYYY-MM-DD */
-  max?: string;
-  /** Can the user input a future date? */
-  allow_future?: boolean,
-  /** Can the user input a data in the past? */
-  allow_past?: boolean,
+  max?: string | 'now';
 }
 
 /**
@@ -72,7 +68,7 @@ export interface ITime {
   id: string;
   type: 'time';
   label?: string;
-  required?: boolean;
+  required?: true;
   /** uuid */
   attribute: string;
   /** HH:mm:ss */
@@ -85,11 +81,10 @@ export interface ITime {
    * Whether to display time with an 'AM/PM' or in 24 hour time.
    * Regardless of this input the server expects 24 hour time
    */
-  format?: '24' | '12';
+  amPmFormat?: true;
   /** Eg: 15 = only allow time in 15 minute increments (3:00, 3:15, 3:30, 3:45). The increment is assumed to start from the hour and will not be greater than 60 */
   minutes_increment?: number;
-  /** As above but for seconds */
-  seconds_increment?: number;
+  allowSeconds?: true;
 }
 
 
@@ -102,15 +97,15 @@ export interface IDateTime {
   id: string;
   type: 'datetime',
   label?: string;
-  required?: boolean;
+  required?: true;
   /** uuid */
   attribute: string;
   /** YYYY-MM-DD HH:mm:ss */
   default?: string;
   /** YYYY-MM-DD */
-  date_min?: string;
+  date_min?: string | 'now';
   /** YYYY-MM-DD */
-  date_max?: string;
+  date_max?: string | 'now';
   /** HH:mm:ss */
   time_min?: string;
   /** HH:mm:ss */
@@ -118,15 +113,10 @@ export interface IDateTime {
   /** Whether to display time with an 'AM/PM' or in 24 hour time.
    *  Regardless of this input the server expects 24 hour time
    */
-  format?: '24' | '12',
+  amPmFormat?: true;
   /** Eg: 15 = only allow time in 15 minute increments (3:00, 3:15, 3:30, 3:45). The increment is assumed to start from the hour and will not be greater than 60 */
   minutes_increment?: number;
-  /** As above but for seconds */
-  seconds_increment?: number;
-  /** Can the user input a future date? */
-  allow_future?: boolean;
-  /** Can the user input a data in the past? */
-  allow_past?: boolean,
+  allow_seconds?: true;
 }
 
 /**
@@ -151,18 +141,18 @@ export interface IOptions {
   id: string;
   type: 'options';
   /**
-   * Display as a drop down or as a series of radio buttons. \
-   * Default 'menu'
+   * Display as a series of radio buttons. \
+   * Default display as standart select
    */
-  as?: 'radio' | 'menu';
+  asRadio?: true;
   label?: string;
-  required?: boolean;
-  default: number;
+  required?: true;
+  default?: string;
   /** uuid */
   attribute: string;
   options: Array<{ label: string, value: string }>;
   /** Allow a user to add their own option, not in the list, in */
-  allow_other?: boolean;
+  allow_other?: true;
 }
 
 /**
@@ -174,7 +164,7 @@ export interface IFile {
   id: string;
   type: 'file';
   label?: string;
-  required?: boolean;
+  required?: true;
   /** uuid */
   attribute: string;
   /** The max number of files that can be uploaded. Defaults to 1 */
@@ -195,9 +185,9 @@ export interface IFile {
  */
 export interface IImage {
   id: string;
-  type: 'image',
+  type: 'image';
   /** The base64 date URI of the image */
-  data: string
+  data: string;
 }
 
 /**
@@ -214,7 +204,7 @@ export interface INumberOfInstances {
   id: string;
   type: 'number_of_instances',
   label?: string;
-  required?: boolean;
+  required?: true;
   default?: number;
   /** The name of the entity */
   entity: string;
@@ -230,10 +220,10 @@ export interface INumberOfInstances {
 export interface IText {
   /** unique id of the control */
   id: string;
-  type: 'text',
+  type: 'text';
   label?: string;
-  required?: boolean;
-  default?: number;
+  required?: true;
+  default?: string;
   /** uuid */
   attribute: string;
   /** The maximum length of the string */
@@ -271,9 +261,12 @@ export interface IEntity {
   id: string;
   type: 'entity';
   label?: string;
-  required?: boolean;
-  /** Should all the fields be vertical (like table columns) or horizontal (individual rows) */
+  /** min number of instances */
+  min?: number;
+  max?: number;
+  /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   display?: 'horizontal' | 'vertical';
+  /** describes single 'row' of entries, each of which has all controls from `template` */
   template: Exclude< Control, IEntity >[]
 }
 
