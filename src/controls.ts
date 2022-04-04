@@ -58,6 +58,7 @@ export interface IDate {
   /** Maximum date allowed, YYYY-MM-DD */
   max?: string | 'now';
 }
+export const DATE_FORMAT = 'yyyy-MM-dd';
 
 /**
  * Allow a user to enter a time. This should send an ISO time string back to the server ('HH:mm:ss').
@@ -87,6 +88,8 @@ export interface ITime {
   allowSeconds?: true;
 }
 
+export const TIME_FORMAT_24 = 'HH:mm:ss';
+export const TIME_FORMAT_12 = 'h:mm:ss a';
 
 /**
  * Allow a user to enter a date and time in one control. This should send an ISO date time string back to the server ('YYYY-MM-DD HH:mm:ssZ').
@@ -119,6 +122,8 @@ export interface IDateTime {
   allow_seconds?: true;
 }
 
+export const DATE_TIME_FORMAT_24 = `${ DATE_FORMAT } ${ TIME_FORMAT_24 }`;
+export const DATE_TIME_FORMAT_12 = `${ DATE_FORMAT } ${ TIME_FORMAT_12 }`;
 /**
  * Allow a user to select from a predefined list of options (eg: a dropdown or a radio button).
  * ```text
