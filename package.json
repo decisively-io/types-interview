@@ -1,13 +1,13 @@
 {
     "name": "@decisively-io/types-interview",
-    "version": "0.1.4",
+    "version": "0.1.7",
     "description": "A type package for the Decisively interview system.",
     "main": "./index.js",
     "types": "./index.d.ts",
     "scripts": {
         "dev": "tsc -w",
-        "transpileToDist": "rm -rf dist && rm -rf docs && tsc && cp README.md package*.json ./dist",
-        "publishS": "yarn transpileToDist && yarn publish ./dist"
+        "transpileToDist": "rm -rf dist && tsc && cp README.md package*.json ./dist",
+        "publishDist": "yarn transpileToDist && yarn publish ./dist"
     },
     "keywords": [
         "decisively",
