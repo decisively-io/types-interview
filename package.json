@@ -1,6 +1,6 @@
 {
     "name": "@decisively-io/types-interview",
-    "version": "0.1.0-20jbc1k.2",
+    "version": "0.1.1",
     "description": "A type package for the Decisively interview system.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -8,8 +8,7 @@
         "clean": "rm -rf dist && rm -rf docs",
         "build": "yarn clean && tsc",
         "dev": "tsc -w",
-        "prepublish": "yarn build",
-        "publish:20jbc1k": "npm publish --tag 20jbc1k"
+        "prepublish": "yarn build"
     },
     "keywords": [
         "decisively",

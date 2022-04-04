@@ -1,5 +1,8 @@
 src/
+.gitignore
+.npmignore
+.npmrc
 .eslint*
 .prettierrc*
-yarn.lock
 tsconfig.json
+yarn.lock
