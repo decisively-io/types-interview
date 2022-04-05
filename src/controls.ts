@@ -134,7 +134,8 @@ export interface IDateTime {
   amPmFormat?: true;
   /** Eg: 15 = only allow time in 15 minute increments (3:00, 3:15, 3:30, 3:45). The increment is assumed to start from the hour and will not be greater than 60 */
   minutes_increment?: number;
-  allow_seconds?: true;
+  /** mui picker doesn't have this control */
+  // allow_seconds?: true;
 }
 
 export const DATE_TIME_FORMAT_24 = `${ DATE_FORMAT } ${ TIME_FORMAT_24 }`;
