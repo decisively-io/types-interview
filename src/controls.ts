@@ -12,6 +12,7 @@ export interface IBoolean {
   label?: string;
   required?: true;
   default?: boolean;
+  value?: boolean | null,
   // The GUID of the attribute
   attribute: string;
 }
@@ -31,10 +32,11 @@ export interface ICurrency {
   default?: number;
   /** uuid */
   attribute: string;
+  value?: number | null;
   /**
    * ??? If not set at design time, this will use the currency symbol in the locale settings for the release
    * @example 'EUR'
-   * @default '$'
+   * @default 'AUD'
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
    */
   symbol?: string;
@@ -61,6 +63,7 @@ export interface IDate {
   required?: true;
   /** uuid */
   attribute: string;
+  value?: string | null;
   /** YYYY-MM-DD */
   default?: string;
   /** Minimum date allowed, YYYY-MM-DD */
@@ -82,6 +85,7 @@ export interface ITime {
   required?: true;
   /** uuid */
   attribute: string;
+  value?: string | null;
   /** HH:mm:ss */
   default?: string;
   /** Minimum time allowed, HH:mm:ss */
@@ -113,6 +117,7 @@ export interface IDateTime {
   required?: true;
   /** uuid */
   attribute: string;
+  value: string | null;
   /** YYYY-MM-DD HH:mm:ss */
   default?: string;
   /** YYYY-MM-DD */
@@ -162,12 +167,15 @@ export interface IOptions {
   asRadio?: true;
   label?: string;
   required?: true;
+  value?: string | boolean | null;
   default?: string;
   /** uuid */
   attribute: string;
-  options: Array<{ label: string, value: string }>;
+  options: Array<{ label: string, value: string | boolean }>;
   /** Allow a user to add their own option, not in the list, in */
   allow_other?: true;
+  /** uuid */
+  enum_id: string;
 }
 
 /**
@@ -241,6 +249,7 @@ export interface IText {
   default?: string;
   /** uuid */
   attribute: string;
+  value?: string | null;
   /** The maximum length of the string */
   max?: number;
 }
@@ -276,13 +285,13 @@ export interface IEntity {
   id: string;
   type: 'entity';
   label?: string;
+  /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
+  /** describes single 'row' of entries, each of which has all controls from `template` */
+  display?: 'horizontal' | 'vertical';
+  template: Exclude< Control, IEntity >[]
   /** min number of instances */
   min?: number;
   max?: number;
-  /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
-  display?: 'horizontal' | 'vertical';
-  /** describes single 'row' of entries, each of which has all controls from `template` */
-  template: Exclude< Control, IEntity >[]
 }
 
 export type Control =
