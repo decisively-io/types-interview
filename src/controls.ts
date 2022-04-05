@@ -117,7 +117,7 @@ export interface IDateTime {
   required?: true;
   /** uuid */
   attribute: string;
-  value: string | null;
+  value?: string | null;
   /** YYYY-MM-DD HH:mm:ss */
   default?: string;
   /** YYYY-MM-DD */
