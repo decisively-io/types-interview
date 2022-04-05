@@ -168,7 +168,7 @@ export interface IOptions {
   label?: string;
   required?: true;
   value?: string | boolean | null;
-  default?: string;
+  default?: string | boolean;
   /** uuid */
   attribute: string;
   options: Array<{ label: string, value: string | boolean }>;
