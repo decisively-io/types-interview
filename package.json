@@ -1,6 +1,6 @@
 {
     "name": "@decisively-io/types-interview",
-    "version": "0.1.8-20jbc1k.5",
+    "version": "0.1.8-20jbc1k.6",
     "description": "A type package for the Decisively interview system.",
     "main": "./index.js",
     "types": "./index.d.ts",

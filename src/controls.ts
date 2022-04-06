@@ -230,6 +230,7 @@ export interface INumberOfInstances {
   label?: string;
   required?: true;
   default?: number;
+  value?: INumberOfInstances[ 'default' ] | null;
   /** The name of the entity */
   entity: string;
   /**
