@@ -1,13 +1,13 @@
 {
     "name": "@decisively-io/types-interview",
-    "version": "0.1.8-20jbc1k.10",
+    "version": "0.1.9",
     "description": "A type package for the Decisively interview system.",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
         "dev": "tsc -w",
         "transpileToDist": "rm -rf dist && tsc",
-        "publish:20jbc1k": "npm run transpileToDist && npm publish --tag 20jbc1k"
+        "publishS": "npm run transpileToDist && npm publish"
     },
     "keywords": [
         "decisively",
