@@ -6,12 +6,20 @@ export type ProjectId = string;
 export type SessionId = string;
 export type InterviewId = string;
 export type AttributeId = string;
+export type AttributeValue = string | number | boolean;
 
 /** Navigation can be step id, or true for next, false for no navigation */
 export type Navigate = StepId | boolean;
 
-export interface Data {
-  [name: AttributeId]: string | number | boolean;
+export type AttributeData = Record<AttributeId, AttributeValue>;
+
+export interface EntityData extends AttributeData {
+  '@parent': string;
+};
+
+export interface TypedData {
+  type: string; // auto, text, ...
+  value: AttributeValue;
 };
 
 /** Defines the context that the attributes within the screen exist within (whether they belong to the global object, or a sub-entity) */
@@ -27,7 +35,7 @@ export interface Context {
 /** Data structure used to calculate the value for a Dynamic Attribute.  */
 export interface Simulate {
   goals: AttributeId[];
-  data: Data;
+  data: AttributeData;
 };
 
 /** The state attribute provides the values and additional information about attributes that will be displayed on the screen, but may require checking with the server for the latest information (aka: Dynamic Attributes). */
@@ -73,7 +81,7 @@ export interface Session {
   sessionId: string;
   status: 'in-progress' |'complete' | 'error';
   context: Context;
-  data: Data;
+  data: Record<AttributeId, TypedData>;
   state: State;
   steps: Step[]
   screen: Screen;

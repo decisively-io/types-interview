@@ -214,6 +214,10 @@ export interface IImage {
   data: string;
 }
 
+export interface IEntityInstance {
+  id: string;
+}
+
 /**
  * Collects the number of instances of an entity the user will want. \
  * This will be used to control the repetition of steps to collect information \
@@ -228,16 +232,14 @@ export interface INumberOfInstances {
   id: string;
   type: 'number_of_instances',
   label?: string;
-  required?: true;
-  default?: number;
+  default?: IEntityInstance[];
   value?: INumberOfInstances[ 'default' ] | null;
   /** The name of the entity */
   entity: string;
   /**
-   * The minimum number of instances. 0 or greater.\
-   * Default is 0 unless required, in which case 1.
+   * The minimum number of instances. 0 or greater.
    */
-  min?: number;
+  min: number;
   max?: number;
 }
 
@@ -287,6 +289,8 @@ export interface IEntity {
   id: string;
   type: 'entity';
   label?: string;
+  /** The name of the entity */
+  entity: string;
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: 'horizontal' | 'vertical';
