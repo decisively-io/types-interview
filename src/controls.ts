@@ -283,6 +283,8 @@ export interface ITypography {
     | 'caption'
 }
 
+export type NonNestedControl = Exclude< Control, IEntity >;
+
 /**
  * Collect information about instances (of an entity) within a tabular structure.
  */
@@ -296,7 +298,8 @@ export interface IEntity {
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: 'horizontal' | 'vertical';
-  template: Exclude< Control, IEntity >[]
+  template: NonNestedControl[];
+  value?: null | NonNestedControl[][];
   /** min number of instances */
   min?: number;
   max?: number;
