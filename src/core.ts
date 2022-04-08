@@ -6,15 +6,21 @@ export type ProjectId = string;
 export type SessionId = string;
 export type InterviewId = string;
 export type AttributeId = string;
-export type AttributeValue = string | number | boolean;
+export type AttributeValue = string | number | boolean | Record<string, AttributeValue>[];
 
 /** Navigation can be step id, or true for next, false for no navigation */
 export type Navigate = StepId | boolean;
 
 export type AttributeData = Record<AttributeId, AttributeValue>;
 
-export interface EntityData extends AttributeData {
-  '@parent': string;
+export interface Parent {
+  '@parent': string | undefined;
+};
+
+export type ResponseData = AttributeData & Parent;
+
+export interface IEntityInstance {
+  '@id': string;
 };
 
 export interface TypedData {
@@ -81,7 +87,7 @@ export interface Session {
   sessionId: string;
   status: 'in-progress' |'complete' | 'error';
   context: Context;
-  data: Record<AttributeId, TypedData>;
+  data: Record<AttributeId, TypedData> & Parent;
   state: State;
   steps: Step[]
   screen: Screen;
