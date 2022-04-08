@@ -299,7 +299,7 @@ export interface IEntity {
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: 'horizontal' | 'vertical';
   template: NonNestedControl[];
-  value?: null | NonNestedControl[][];
+  value?: null | any[][];
   /** min number of instances */
   min?: number;
   max?: number;
