@@ -1,3 +1,5 @@
+import { IEntityInstance } from "./core";
+
 /**
  * A control to collect a true or false response from a user. Usually rendered as a checkbox.
  * Note: the control needs to allow for an indeterminate (or uncertain) response - i.e. the
@@ -214,10 +216,6 @@ export interface IImage {
   type: 'image';
   /** The base64 date URI of the image */
   data: string;
-}
-
-export interface IEntityInstance {
-  id: string;
 }
 
 /**
