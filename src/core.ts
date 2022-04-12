@@ -23,6 +23,8 @@ export interface IEntityInstance {
   '@id': string;
 };
 
+export type IEntityValue = AttributeData & IEntityInstance;
+
 export interface TypedData {
   type: string; // auto, text, ...
   value: AttributeValue;
@@ -82,6 +84,13 @@ export interface Screen {
   controls: Control[]
 };
 
+export interface Progress {
+  /** The estimated time remaining for the interview, in seconds */
+  time: number,
+  /** The percentage completed, between 0-100 */
+  percentage: number,
+};
+
 export interface Session {
   /** Unique ID of the session */
   sessionId: string;
@@ -91,4 +100,5 @@ export interface Session {
   state?: State;
   steps: Step[]
   screen: Screen;
+  progress?: Progress;
 };

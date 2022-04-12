@@ -1,4 +1,4 @@
-import { IEntityInstance } from "./core";
+import { IEntityInstance, IEntityValue } from "./core";
 
 /**
  * A control to collect a true or false response from a user. Usually rendered as a checkbox.
@@ -142,8 +142,8 @@ export interface IDateTime {
   // allow_seconds?: true;
 }
 
-export const DATE_TIME_FORMAT_24 = `${ DATE_FORMAT } ${ TIME_FORMAT_24 }`;
-export const DATE_TIME_FORMAT_12 = `${ DATE_FORMAT } ${ TIME_FORMAT_12 }`;
+export const DATE_TIME_FORMAT_24 = `${DATE_FORMAT} ${TIME_FORMAT_24}`;
+export const DATE_TIME_FORMAT_12 = `${DATE_FORMAT} ${TIME_FORMAT_12}`;
 /**
  * Allow a user to select from a predefined list of options (eg: a dropdown or a radio button).
  * ```text
@@ -233,7 +233,7 @@ export interface INumberOfInstances {
   type: 'number_of_instances',
   label?: string;
   default?: IEntityInstance[];
-  value?: INumberOfInstances[ 'default' ] | null;
+  value?: INumberOfInstances['default'] | null;
   /** The name of the entity */
   entity: string;
   /**
@@ -268,20 +268,20 @@ export interface ITypography {
   type: 'typography',
   text: string;
   style:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'subtitle1'
-    | 'subtitle2'
-    | 'body1'
-    | 'body2'
-    | 'caption'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'body1'
+  | 'body2'
+  | 'caption'
 }
 
-export type NonNestedControl = Exclude< Control, IEntity >;
+export type NonNestedControl = Exclude<Control, IEntity>;
 
 /**
  * Collect information about instances (of an entity) within a tabular structure.
@@ -297,7 +297,7 @@ export interface IEntity {
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: 'horizontal' | 'vertical';
   template: NonNestedControl[];
-  value?: any[][];
+  value?: IEntityValue[];
   /** min number of instances */
   min?: number;
   max?: number;
@@ -318,5 +318,5 @@ export type Control =
   | IEntity;
 
 export interface IControlsValue {
-  [ controlUUID: string ]: any;
+  [controlUUID: string]: any;
 }
