@@ -1,5 +1,4 @@
 import { Control } from './controls';
-import {produce} from 'immer'
 
 export type StepId = string;
 export type ReleaseId = string;
@@ -23,6 +22,8 @@ export type ResponseData = AttributeData & Parent;
 export interface IEntityInstance {
   '@id': string;
 };
+
+export type IEntityValue = AttributeData & IEntityInstance;
 
 export interface TypedData {
   type: string; // auto, text, ...
@@ -74,36 +75,6 @@ export interface Step {
   steps?: Step[]
 };
 
-
-/* eslint-disable no-param-reassign */
-export function setCurrentInStep(s: Step, id: Step[ 'id' ]): typeof s {
-  return produce(s, draft => {
-    if(draft.steps !== undefined && draft.steps.length !== 0) {
-      draft.steps = draft.steps.map(step => setCurrentInStep(step, id));
-    }
-
-    draft.current = draft.id === id;
-
-    return draft;
-  });
-}
-/* eslint-enable no-param-reassign */
-
-
-export function containsCurrentStep(s: Step): boolean {
-  return s.current || (s.steps !== undefined && s.steps.some(s => containsCurrentStep(s)));
-}
-
-export function getCurrentStep(s: Step): typeof s | null {
-  if(s.current) return s;
-  if(s.steps === undefined || s.steps.length === 0) return null;
-
-  return s.steps.reduce< typeof s | null >(
-    (a, s) => (a === null ? getCurrentStep(s) : a),
-    null,
-  );
-}
-
 export interface Screen {
   /** The title of the screen. This may differ from the title in the step */
   title: string,
@@ -113,13 +84,21 @@ export interface Screen {
   controls: Control[]
 };
 
+export interface Progress {
+  /** The estimated time remaining for the interview, in seconds */
+  time: number,
+  /** The percentage completed, between 0-100 */
+  percentage: number,
+};
+
 export interface Session {
   /** Unique ID of the session */
   sessionId: string;
-  status: 'in-progress' |'complete' | 'error';
+  status: 'in-progress' | 'complete' | 'error';
   context: Context;
   data: Record<AttributeId, TypedData> & Parent;
-  state: State;
+  state?: State;
   steps: Step[]
   screen: Screen;
+  progress?: Progress;
 };
