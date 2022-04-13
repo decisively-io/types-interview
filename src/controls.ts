@@ -279,6 +279,10 @@ export interface ITypography {
     | 'body1'
     | 'body2'
     | 'caption'
+    | 'banner-green'
+    | 'banner-yellow'
+    | 'banner-red',
+  emoji?: string;
 }
 
 export type NonNestedControl = Exclude< Control, IEntity >;
