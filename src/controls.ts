@@ -37,19 +37,6 @@ export interface ICurrency {
   value?: number | null;
   /** @default '$'' */
   symbol?: string;
-  // /**
-  //  * ??? If not set at design time, this will use the currency symbol in the locale settings for the release
-  //  * @example 'EUR'
-  //  * @default 'AUD'
-  //  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
-  //  */
-  // symbol?: string;
-  // /**
-  //  * @example 'de-DE'
-  //  * @default 'en-AU'
-  //  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
-  //  */
-  // locale?: string;
   /** Minimum number allowed - if not set assume no restriction */
   min?: number;
   /** Maximum number allowed - if not set assume no restriction */
