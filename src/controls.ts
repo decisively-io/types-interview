@@ -243,6 +243,10 @@ export interface IText {
   value?: string | null;
   /** The maximum length of the string */
   max?: number;
+  variation?: (
+    | { type: 'email' }
+    | { type: 'number' }
+  );
 }
 
 /**
