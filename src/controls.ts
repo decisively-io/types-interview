@@ -247,6 +247,10 @@ export interface IText {
     | { type: 'email' }
     | { type: 'number' }
   );
+  multi?: {
+    maxRows?: number;
+    minRows?: number;
+  }
 }
 
 /**
