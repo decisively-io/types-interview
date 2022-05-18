@@ -12,7 +12,7 @@ export interface IBoolean {
   id: string;
   type: 'boolean';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   default?: boolean;
   value?: boolean | null,
@@ -31,7 +31,7 @@ export interface ICurrency {
   id: string;
   type: 'currency';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   default?: number;
   /** uuid */
@@ -53,7 +53,7 @@ export interface IDate {
   id: string;
   type: 'date';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   /** uuid */
   attribute: string;
@@ -76,7 +76,7 @@ export interface ITime {
   id: string;
   type: 'time';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   /** uuid */
   attribute: string;
@@ -109,7 +109,7 @@ export interface IDateTime {
   id: string;
   type: 'datetime',
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   /** uuid */
   attribute: string;
@@ -163,7 +163,7 @@ export interface IOptions {
    */
   asRadio?: true;
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   value?: string | boolean | null;
   default?: string | boolean;
@@ -185,7 +185,7 @@ export interface IFile {
   id: string;
   type: 'file';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   /** uuid */
   attribute: string;
@@ -226,7 +226,7 @@ export interface INumberOfInstances {
   id: string;
   type: 'number_of_instances',
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   default?: IEntityInstance[];
   value?: INumberOfInstances['default'] | null;
   /** The name of the entity */
@@ -244,7 +244,7 @@ export interface IText {
   id: string;
   type: 'text';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   required?: true;
   default?: string;
   /** uuid */
@@ -299,7 +299,7 @@ export interface IEntity {
   id: string;
   type: 'entity';
   label?: string;
-  labelLength?: string;
+  labelLength?: number;
   /** The name of the entity */
   entity: string;
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
