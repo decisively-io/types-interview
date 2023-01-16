@@ -101,4 +101,5 @@ export interface Session {
   steps: Step[]
   screen: Screen;
   progress?: Progress;
+  renderAt?: number; // indicator on whether a dynamic replacement has occurred
 };
