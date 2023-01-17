@@ -42,17 +42,19 @@ export interface Context {
 
 /** Data structure used to calculate the value for a Dynamic Attribute.  */
 export interface Simulate {
-  goals: AttributeId[];
+  mode: 'api';
+  save: false;
+  goal: AttributeId;
   data: AttributeData;
 };
 
 /** The state attribute provides the values and additional information about attributes that will be displayed on the screen, but may require checking with the server for the latest information (aka: Dynamic Attributes). */
 export interface State {
-  [name: AttributeId]: {
-    dependencies: AttributeId[];
-    value: any;
-  }
-};
+  id: AttributeId;
+  // the backend will calculate the dependencies at runtime, so the runtime can monitor them and refresh the session
+  dependencies?: AttributeId[];
+  value?: any;
+}
 
 export interface Step {
   /** Unique ID of the screen */
@@ -97,7 +99,7 @@ export interface Session {
   status: 'in-progress' | 'complete' | 'error';
   context: Context;
   data: Record<AttributeId, TypedData> & Parent;
-  state?: State;
+  state?: State[];
   steps: Step[]
   screen: Screen;
   progress?: Progress;
