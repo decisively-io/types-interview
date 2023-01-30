@@ -14,6 +14,7 @@ export interface IBoolean {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   default?: boolean;
   value?: boolean | null,
   // The GUID of the attribute
@@ -33,6 +34,7 @@ export interface ICurrency {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   default?: number;
   /** uuid */
   attribute: string;
@@ -55,6 +57,7 @@ export interface IDate {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   /** uuid */
   attribute: string;
   value?: string | null;
@@ -78,6 +81,7 @@ export interface ITime {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   /** uuid */
   attribute: string;
   value?: string | null;
@@ -111,6 +115,7 @@ export interface IDateTime {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   /** uuid */
   attribute: string;
   value?: string | null;
@@ -165,14 +170,16 @@ export interface IOptions {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   value?: string | boolean | null;
   default?: string | boolean;
   /** uuid */
   attribute: string;
+  /** design and runtime */
   options: Array<{ label: string, value: string | boolean }>;
   /** Allow a user to add their own option, not in the list, in */
   allow_other?: true;
-  /** uuid */
+  /** uuid, design time only */
   enum_id: string;
 }
 
@@ -228,6 +235,7 @@ export interface INumberOfInstances {
   label?: string;
   labelLength?: number;
   default?: IEntityInstance[];
+  disabled?: true;
   value?: INumberOfInstances['default'] | null;
   /** The name of the entity */
   entity: string;
@@ -246,6 +254,7 @@ export interface IText {
   label?: string;
   labelLength?: number;
   required?: true;
+  disabled?: true;
   default?: string;
   /** uuid */
   attribute: string;
