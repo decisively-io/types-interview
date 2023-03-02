@@ -58,6 +58,7 @@ export interface IDate {
   labelLength?: number;
   required?: true;
   disabled?: true;
+  allowManual?: true;
   /** uuid */
   attribute: string;
   value?: string | null;
