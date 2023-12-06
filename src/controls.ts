@@ -1,4 +1,4 @@
-import { IEntityInstance, IEntityValue } from "./core";
+import type { IEntityInstance, IEntityValue } from "./core";
 
 /**
  * A control to collect a true or false response from a user. Usually rendered as a checkbox.
@@ -299,7 +299,6 @@ export interface ITypography {
   emoji?: string;
 }
 
-export type NonNestedControl = Exclude<Control, IEntity>;
 
 /**
  * Collect information about instances (of an entity) within a tabular structure.
@@ -315,7 +314,7 @@ export interface IEntity {
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: 'horizontal' | 'vertical';
-  template: NonNestedControl[];
+  template: Control[];
   value?: IEntityValue[];
   /** min number of instances */
   min?: number;
