@@ -61,14 +61,22 @@ export interface IDate {
   allowManual?: true;
   /** uuid */
   attribute: string;
+  /** 'YYYY-MM-DD' */
   value?: string | null;
-  /** YYYY-MM-DD */
+  /** 'YYYY-MM-DD' */
   default?: string;
   /** Minimum date allowed, YYYY-MM-DD */
   min?: string | 'now';
   /** Maximum date allowed, YYYY-MM-DD */
   max?: string | 'now';
 }
+/**
+ * pretty strange format, because it's from date-fns
+ * @link https://date-fns.org/v2.16.1/docs/format. \
+ * For some reason their approach is that dd is "day \
+ * of month" but DD is "day of year" (in dayjs DD is\
+ * "day of month")
+ */
 export const DATE_FORMAT = 'yyyy-MM-dd';
 
 /**
@@ -85,12 +93,13 @@ export interface ITime {
   disabled?: true;
   /** uuid */
   attribute: string;
+  /** 'HH:mm:ss' */
   value?: string | null;
-  /** HH:mm:ss */
+  /** 'HH:mm:ss' */
   default?: string;
-  /** Minimum time allowed, HH:mm:ss */
+  /** Minimum time allowed, 'HH:mm:ss' */
   min?: string;
-  /** Maximum time allowed, HH:mm:ss */
+  /** Maximum time allowed, 'HH:mm:ss' */
   max?: string;
   /**
    * Whether to display time with an 'AM/PM' or in 24 hour time.
@@ -119,16 +128,17 @@ export interface IDateTime {
   disabled?: true;
   /** uuid */
   attribute: string;
+  /** 'YYYY-MM-DD HH:mm:ss' */
   value?: string | null;
-  /** YYYY-MM-DD HH:mm:ss */
+  /** 'YYYY-MM-DD HH:mm:ss' */
   default?: string;
-  /** YYYY-MM-DD */
+  /** 'YYYY-MM-DD', 'now' */
   date_min?: string | 'now';
-  /** YYYY-MM-DD */
+  /** 'YYYY-MM-DD', 'now' */
   date_max?: string | 'now';
-  /** HH:mm:ss */
+  /** 'HH:mm:ss' */
   time_min?: string;
-  /** HH:mm:ss */
+  /** 'HH:mm:ss' */
   time_max?: string;
   /** Whether to display time with an 'AM/PM' or in 24 hour time.
    *  Regardless of this input the server expects 24 hour time
