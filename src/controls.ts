@@ -19,6 +19,7 @@ export interface IBoolean {
   value?: boolean | null,
   // The GUID of the attribute
   attribute: string;
+  showExplanation?: boolean,
 }
 
 /**
@@ -45,6 +46,7 @@ export interface ICurrency {
   min?: number;
   /** Maximum number allowed - if not set assume no restriction */
   max?: number;
+  showExplanation?: boolean,
 }
 /**
  * Allow a user to enter a date. This should send an ISO date string back to the server ('YYYY-MM-DD').
@@ -69,6 +71,7 @@ export interface IDate {
   min?: string | 'now';
   /** Maximum date allowed, YYYY-MM-DD */
   max?: string | 'now';
+  showExplanation?: boolean,
 }
 /**
  * pretty strange format, because it's from date-fns
@@ -109,6 +112,7 @@ export interface ITime {
   /** Eg: 15 = only allow time in 15 minute increments (3:00, 3:15, 3:30, 3:45). The increment is assumed to start from the hour and will not be greater than 60 */
   minutes_increment?: number;
   allowSeconds?: true;
+  showExplanation?: boolean,
 }
 
 export const TIME_FORMAT_24 = 'HH:mm:ss';
@@ -148,6 +152,7 @@ export interface IDateTime {
   minutes_increment?: number;
   /** mui picker doesn't have this control */
   // allow_seconds?: true;
+  showExplanation?: boolean,
 }
 
 export const DATE_TIME_FORMAT_24 = `${DATE_FORMAT} ${TIME_FORMAT_24}`;
@@ -192,6 +197,7 @@ export interface IOptions {
   allow_other?: true;
   /** uuid, design time only */
   enum_id: string;
+  showExplanation?: boolean,
 }
 
 /**
@@ -213,6 +219,7 @@ export interface IFile {
   file_type?: string;
   /** The maximum size of a document, in Mb */
   max_size?: number;
+  showExplanation?: boolean,
 }
 
 /**
@@ -228,6 +235,7 @@ export interface IImage {
   type: 'image';
   /** The base64 date URI of the image */
   data: string;
+  showExplanation?: boolean,
 }
 
 /**
@@ -255,6 +263,7 @@ export interface INumberOfInstances {
    */
   min: number;
   max?: number;
+  showExplanation?: boolean,
 }
 
 /** Collects text from the user.  */
@@ -279,7 +288,8 @@ export interface IText {
   multi?: {
     maxRows?: number;
     minRows?: number;
-  }
+  },
+  showExplanation?: boolean,
 }
 
 /**
@@ -307,6 +317,7 @@ export interface ITypography {
     | 'banner-yellow'
     | 'banner-red',
   emoji?: string;
+  showExplanation?: boolean,
 }
 
 
@@ -329,6 +340,7 @@ export interface IEntity {
   /** min number of instances */
   min?: number;
   max?: number;
+  showExplanation?: boolean,
 }
 
 export type Control =
