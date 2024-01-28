@@ -10,16 +10,16 @@ import type { IEntityInstance, IEntityValue } from "./core";
 export interface IBoolean {
   // unique id of the control
   id: string;
-  type: 'boolean';
+  type: "boolean";
   label?: string;
   labelLength?: number;
   required?: true;
   disabled?: true;
   default?: boolean;
-  value?: boolean | null,
+  value?: boolean | null;
   // The GUID of the attribute
   attribute: string;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface IBoolean {
 export interface ICurrency {
   /** unique id of the control */
   id: string;
-  type: 'currency';
+  type: "currency";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -46,7 +46,7 @@ export interface ICurrency {
   min?: number;
   /** Maximum number allowed - if not set assume no restriction */
   max?: number;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 /**
  * Allow a user to enter a date. This should send an ISO date string back to the server ('YYYY-MM-DD').
@@ -55,7 +55,7 @@ export interface ICurrency {
 export interface IDate {
   /** unique id of the control */
   id: string;
-  type: 'date';
+  type: "date";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -68,10 +68,10 @@ export interface IDate {
   /** 'YYYY-MM-DD' */
   default?: string;
   /** Minimum date allowed, YYYY-MM-DD */
-  min?: string | 'now';
+  min?: string | "now";
   /** Maximum date allowed, YYYY-MM-DD */
-  max?: string | 'now';
-  showExplanation?: boolean,
+  max?: string | "now";
+  showExplanation?: boolean;
 }
 /**
  * pretty strange format, because it's from date-fns
@@ -80,7 +80,7 @@ export interface IDate {
  * of month" but DD is "day of year" (in dayjs DD is\
  * "day of month")
  */
-export const DATE_FORMAT = 'yyyy-MM-dd';
+export const DATE_FORMAT = "yyyy-MM-dd";
 
 /**
  * Allow a user to enter a time. This should send an ISO time string back to the server ('HH:mm:ss').
@@ -89,7 +89,7 @@ export const DATE_FORMAT = 'yyyy-MM-dd';
 export interface ITime {
   /** unique id of the control */
   id: string;
-  type: 'time';
+  type: "time";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -112,11 +112,11 @@ export interface ITime {
   /** Eg: 15 = only allow time in 15 minute increments (3:00, 3:15, 3:30, 3:45). The increment is assumed to start from the hour and will not be greater than 60 */
   minutes_increment?: number;
   allowSeconds?: true;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
-export const TIME_FORMAT_24 = 'HH:mm:ss';
-export const TIME_FORMAT_12 = 'h:mm:ss a';
+export const TIME_FORMAT_24 = "HH:mm:ss";
+export const TIME_FORMAT_12 = "h:mm:ss a";
 
 /**
  * Allow a user to enter a date and time in one control. This should send an ISO date time string back to the server ('YYYY-MM-DD HH:mm:ssZ').
@@ -125,7 +125,7 @@ export const TIME_FORMAT_12 = 'h:mm:ss a';
 export interface IDateTime {
   /** unique id of the control */
   id: string;
-  type: 'datetime',
+  type: "datetime";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -137,9 +137,9 @@ export interface IDateTime {
   /** 'YYYY-MM-DD HH:mm:ss' */
   default?: string;
   /** 'YYYY-MM-DD', 'now' */
-  date_min?: string | 'now';
+  date_min?: string | "now";
   /** 'YYYY-MM-DD', 'now' */
-  date_max?: string | 'now';
+  date_max?: string | "now";
   /** 'HH:mm:ss' */
   time_min?: string;
   /** 'HH:mm:ss' */
@@ -152,7 +152,7 @@ export interface IDateTime {
   minutes_increment?: number;
   /** mui picker doesn't have this control */
   // allow_seconds?: true;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
 export const DATE_TIME_FORMAT_24 = `${DATE_FORMAT} ${TIME_FORMAT_24}`;
@@ -177,7 +177,7 @@ export const DATE_TIME_FORMAT_12 = `${DATE_FORMAT} ${TIME_FORMAT_12}`;
 export interface IOptions {
   /** unique id of the control */
   id: string;
-  type: 'options';
+  type: "options";
   /**
    * Display as a series of radio buttons. \
    * Default display as standart select
@@ -192,12 +192,12 @@ export interface IOptions {
   /** uuid */
   attribute: string;
   /** design and runtime */
-  options: Array<{ label: string, value: string | boolean }>;
+  options: Array<{ label: string; value: string | boolean }>;
   /** Allow a user to add their own option, not in the list, in */
   allow_other?: true;
   /** uuid, design time only */
   enum_id: string;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
 /**
@@ -207,7 +207,7 @@ export interface IOptions {
 export interface IFile {
   /** unique id of the control */
   id: string;
-  type: 'file';
+  type: "file";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -219,7 +219,7 @@ export interface IFile {
   file_type?: string;
   /** The maximum size of a document, in Mb */
   max_size?: number;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
 /**
@@ -232,10 +232,9 @@ export interface IFile {
  */
 export interface IImage {
   id: string;
-  type: 'image';
+  type: "image";
   /** The base64 date URI of the image */
   data: string;
-  showExplanation?: boolean,
 }
 
 /**
@@ -250,12 +249,12 @@ export interface IImage {
 export interface INumberOfInstances {
   /** unique id of the control */
   id: string;
-  type: 'number_of_instances',
+  type: "number_of_instances";
   label?: string;
   labelLength?: number;
   default?: IEntityInstance[];
   disabled?: true;
-  value?: INumberOfInstances['default'] | null;
+  value?: INumberOfInstances["default"] | null;
   /** The name of the entity */
   entity: string;
   /**
@@ -263,14 +262,13 @@ export interface INumberOfInstances {
    */
   min: number;
   max?: number;
-  showExplanation?: boolean,
 }
 
 /** Collects text from the user.  */
 export interface IText {
   /** unique id of the control */
   id: string;
-  type: 'text';
+  type: "text";
   label?: string;
   labelLength?: number;
   required?: true;
@@ -281,15 +279,12 @@ export interface IText {
   value?: string | null;
   /** The maximum length of the string */
   max?: number;
-  variation?: (
-    | { type: 'email' }
-    | { type: 'number' }
-  );
+  variation?: { type: "email" } | { type: "number" };
   multi?: {
     maxRows?: number;
     minRows?: number;
-  },
-  showExplanation?: boolean,
+  };
+  showExplanation?: boolean;
 }
 
 /**
@@ -299,27 +294,11 @@ export interface IText {
  */
 export interface ITypography {
   id: string;
-  type: 'typography',
+  type: "typography";
   text: string;
-  style:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'subtitle1'
-    | 'subtitle2'
-    | 'body1'
-    | 'body2'
-    | 'caption'
-    | 'banner-green'
-    | 'banner-yellow'
-    | 'banner-red',
+  style: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "subtitle1" | "subtitle2" | "body1" | "body2" | "caption" | "banner-green" | "banner-yellow" | "banner-red";
   emoji?: string;
-  showExplanation?: boolean,
 }
-
 
 /**
  * Collect information about instances (of an entity) within a tabular structure.
@@ -327,35 +306,23 @@ export interface ITypography {
 export interface IEntity {
   /** unique id of the control */
   id: string;
-  type: 'entity';
+  type: "entity";
   label?: string;
   labelLength?: number;
   /** The name of the entity */
   entity: string;
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   /** describes single 'row' of entries, each of which has all controls from `template` */
-  display?: 'horizontal' | 'vertical';
+  display?: "horizontal" | "vertical";
   template: Control[];
   value?: IEntityValue[];
   /** min number of instances */
   min?: number;
   max?: number;
-  showExplanation?: boolean,
+  showExplanation?: boolean;
 }
 
-export type Control =
-  | IBoolean
-  | ICurrency
-  | IDate
-  | ITime
-  | IDateTime
-  | IOptions
-  | IFile
-  | IImage
-  | INumberOfInstances
-  | IText
-  | ITypography
-  | IEntity;
+export type Control = IBoolean | ICurrency | IDate | ITime | IDateTime | IOptions | IFile | IImage | INumberOfInstances | IText | ITypography | IEntity;
 
 export interface IControlsValue {
   [controlUUID: string]: any;
