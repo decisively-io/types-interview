@@ -320,6 +320,7 @@ export interface IEntity {
   min?: number;
   max?: number;
   showExplanation?: boolean;
+  entityId?: string;
 }
 
 export type Control = IBoolean | ICurrency | IDate | ITime | IDateTime | IOptions | IFile | IImage | INumberOfInstances | IText | ITypography | IEntity;
