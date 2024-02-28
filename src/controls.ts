@@ -1,13 +1,20 @@
-import type { IEntityInstance, IEntityValue } from "./core";
+import type { EntityInstance, EntityValue } from "./core";
+
+interface BaseControl {
+  id: string;
+  type: string;
+  attribute?: string;
+}
 
 /**
  * A control to collect a true or false response from a user. Usually rendered as a checkbox.
  * Note: the control needs to allow for an indeterminate (or uncertain) response - i.e. the
  * user did not provide an answer. You can't send back undefined as the server will interpret
  * that as requiring an answer again later. Send back null to mark the question as reviewed
- * but not answered.
+ * but not
+ }answered.
  */
-export interface IBoolean {
+export interface BooleanControl extends BaseControl {
   // unique id of the control
   id: string;
   type: "boolean";
@@ -23,12 +30,17 @@ export interface IBoolean {
 }
 
 /**
+ * @deprecated Use `BooleanControl` instead
+ */
+export type IBoolean = BooleanControl;
+
+/**
  * A number input for inputting currency values. This should:
  * - Show the currency symbol
  * - Allow only numbers to be inputted. There is no restriction on the number of decimal places
  * - Negative numbers are allowed (unless the min is set to 0)
  */
-export interface ICurrency {
+export interface CurrencyControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "currency";
@@ -48,11 +60,17 @@ export interface ICurrency {
   max?: number;
   showExplanation?: boolean;
 }
+
+/**
+ * @deprecated Use `CurrencyControl` instead
+ */
+export type ICurrency = CurrencyControl;
+
 /**
  * Allow a user to enter a date. This should send an ISO date string back to the server ('YYYY-MM-DD').
  * Do not send a time component back.
  */
-export interface IDate {
+export interface DateControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "date";
@@ -73,6 +91,12 @@ export interface IDate {
   max?: string | "now";
   showExplanation?: boolean;
 }
+
+/**
+ * @deprecated Use `DateControl` instead
+ */
+export type IDate = DateControl;
+
 /**
  * pretty strange format, because it's from date-fns
  * @link https://date-fns.org/v2.16.1/docs/format. \
@@ -86,7 +110,7 @@ export const DATE_FORMAT = "yyyy-MM-dd";
  * Allow a user to enter a time. This should send an ISO time string back to the server ('HH:mm:ss').
  * Do not send a date component back.
  */
-export interface ITime {
+export interface TimeControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "time";
@@ -115,6 +139,11 @@ export interface ITime {
   showExplanation?: boolean;
 }
 
+/**
+ * @deprecated Use `TimeControl` instead
+ */
+export type ITime = TimeControl;
+
 export const TIME_FORMAT_24 = "HH:mm:ss";
 export const TIME_FORMAT_12 = "h:mm:ss a";
 
@@ -122,7 +151,7 @@ export const TIME_FORMAT_12 = "h:mm:ss a";
  * Allow a user to enter a date and time in one control. This should send an ISO date time string back to the server ('YYYY-MM-DD HH:mm:ssZ').
  * It's metadata is basically a merge of the date and time, but with seperate min/max.
  */
-export interface IDateTime {
+export interface DateTimeControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "datetime";
@@ -155,8 +184,19 @@ export interface IDateTime {
   showExplanation?: boolean;
 }
 
+/**
+ * @deprecated Use `DateTimeControl` instead
+ */
+export type IDateTime = DateTimeControl;
+
 export const DATE_TIME_FORMAT_24 = `${DATE_FORMAT} ${TIME_FORMAT_24}`;
 export const DATE_TIME_FORMAT_12 = `${DATE_FORMAT} ${TIME_FORMAT_12}`;
+
+export interface Option {
+  label?: string;
+  value: any;
+}
+
 /**
  * Allow a user to select from a predefined list of options (eg: a dropdown or a radio button).
  * ```text
@@ -174,7 +214,7 @@ export const DATE_TIME_FORMAT_12 = `${DATE_FORMAT} ${TIME_FORMAT_12}`;
  * attribute (and not send the enum_id to the client.
  * ```
  */
-export interface IOptions {
+export interface OptionsControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "options";
@@ -192,19 +232,24 @@ export interface IOptions {
   /** uuid */
   attribute: string;
   /** design and runtime */
-  options: Array<{ label: string; value: string | boolean }>;
+  options?: Array<Option>;
   /** Allow a user to add their own option, not in the list, in */
   allow_other?: true;
   /** uuid, design time only */
-  enum_id: string;
+  enum_id?: string;
   showExplanation?: boolean;
 }
+
+/**
+ * @deprecated Use `OptionsControl` instead
+ */
+export type IOptions = OptionsControl;
 
 /**
  * **IMPORTANT** This is not currently supported\
  * Allow a user to upload a file. This metadata is still under construction
  */
-export interface IFile {
+export interface FileControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "file";
@@ -223,6 +268,11 @@ export interface IFile {
 }
 
 /**
+ * @deprecated Use `FileControl` instead
+ */
+export type IFile = FileControl;
+
+/**
  * Display an image to the user. This does not collect any information from the user
  * ```text
  * Note: We may need other attributes to help display the image properly (height, width, stretch?).
@@ -230,12 +280,17 @@ export interface IFile {
  * be done in code in the SDK
  * ```
  */
-export interface IImage {
+export interface ImageControl extends BaseControl {
   id: string;
   type: "image";
   /** The base64 date URI of the image */
   data: string;
 }
+
+/**
+ * @deprecated Use `ImageControl` instead
+ */
+export type IImage = ImageControl;
 
 /**
  * Collects the number of instances of an entity the user will want. \
@@ -246,26 +301,33 @@ export interface IImage {
  * The response to the server at run time is a little different for this control.\
  * See the link above for more detail.
  */
-export interface INumberOfInstances {
+export interface NumberOfInstancesControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "number_of_instances";
   label?: string;
   labelLength?: number;
-  default?: IEntityInstance[];
+  required?: true;
+  default?: EntityInstance[];
   disabled?: true;
-  value?: INumberOfInstances["default"] | null;
+  value?: NumberOfInstancesControl["default"] | null;
+  template?: Control[];
   /** The name of the entity */
   entity: string;
   /**
    * The minimum number of instances. 0 or greater.
    */
-  min: number;
+  min?: number;
   max?: number;
 }
 
+/**
+ * @deprecated Use `NumberOfInstancesControl` instead
+ */
+export type INumberOfInstances = NumberOfInstancesControl;
+
 /** Collects text from the user.  */
-export interface IText {
+export interface TextControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "text";
@@ -288,11 +350,16 @@ export interface IText {
 }
 
 /**
+ * @deprecated Use `TextControl` instead
+ */
+export type IText = TextControl;
+
+/**
  * Display text to the user. This differs from the text control above, \
  * which collects text from the user.\
  * The end-styling of the text is up to the run time.
  */
-export interface ITypography {
+export interface TypographyControl extends BaseControl {
   id: string;
   type: "typography";
   text: string;
@@ -301,9 +368,14 @@ export interface ITypography {
 }
 
 /**
+ * @deprecated Use `TypographyControl` instead
+ */
+export type ITypography = TypographyControl;
+
+/**
  * Collect information about instances (of an entity) within a tabular structure.
  */
-export interface IEntity {
+export interface EntityControl extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "entity";
@@ -315,7 +387,7 @@ export interface IEntity {
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: "horizontal" | "vertical";
   template: Control[];
-  value?: IEntityValue[];
+  value?: EntityValue[];
   /** min number of instances */
   min?: number;
   max?: number;
@@ -323,8 +395,92 @@ export interface IEntity {
   entityId?: string;
 }
 
-export type Control = IBoolean | ICurrency | IDate | ITime | IDateTime | IOptions | IFile | IImage | INumberOfInstances | IText | ITypography | IEntity;
+/**
+ * @deprecated Use `EntityControl` instead
+ */
+export type IEntity = EntityControl;
 
-export interface IControlsValue {
+//#region container
+
+export interface RepeatingContainerControl extends BaseControl {
+  id: string;
+  type: "repeating_container";
+  entity: string;
+  controls: Control[];
+}
+
+export interface CertaintyContainerControl extends BaseControl {
+  id: string;
+  type: "certainty_container";
+  attribute: string;
+  certain: Control[];
+  uncertain: Control[];
+}
+
+export interface SwitchContainerControl extends BaseControl {
+  id: string;
+  type: "switch_container";
+  outcome_true: Control[];
+  outcome_false: Control[];
+  condition?: ConditionExpression;
+}
+
+export interface ConditionalContainerControl<C = Control> extends BaseControl {
+  id: string;
+  type: "conditional_container";
+  condition?: ConditionExpression;
+  controls: C[];
+}
+
+export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals";
+
+export type ConditionValue = [
+  {
+    type: "attribute";
+    attributeId: string | null;
+  },
+  // the RHS of the condition can either be a literal value or an attribute
+  {
+    type: "value" | "attribute";
+    // one or the other, not both
+    value?: string | boolean | null;
+    attributeId?: string | null;
+  },
+];
+
+export interface ConditionExpression {
+  type: ConditionType;
+  elements: ConditionValue | ConditionExpression[];
+}
+
+//#endregion
+
+export type RenderableControl = BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | EntityControl | ConditionalContainerControl<RenderableControl>;
+export type RenderableControlType = RenderableControl["type"];
+
+export type Control =
+  | BooleanControl
+  | CurrencyControl
+  | DateControl
+  | TimeControl
+  | DateTimeControl
+  | OptionsControl
+  | FileControl
+  | ImageControl
+  | NumberOfInstancesControl
+  | TextControl
+  | TypographyControl
+  | EntityControl
+  | RepeatingContainerControl
+  | CertaintyContainerControl
+  | SwitchContainerControl
+  | ConditionalContainerControl;
+
+export interface ControlsValue {
   [controlUUID: string]: any;
 }
+
+/**
+ * @deprecated Use `ControlValue` instead
+ */
+export type IControlsValue = ControlsValue;

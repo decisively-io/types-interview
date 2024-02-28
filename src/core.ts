@@ -1,4 +1,4 @@
-import { Control } from "./controls";
+import { Control, RenderableControl } from "./controls";
 
 export type StepId = string;
 export type ReleaseId = string;
@@ -19,11 +19,21 @@ export interface Parent {
 
 export type ResponseData = AttributeData & Parent;
 
-export interface IEntityInstance {
+export interface EntityInstance {
   "@id": string;
 }
 
-export type IEntityValue = AttributeData & IEntityInstance;
+/**
+ * @deprecated Use `EntityInstance` instead
+ */
+export type IEntityInstance = EntityInstance;
+
+export type EntityValue = AttributeData & EntityInstance;
+
+/**
+ * @deprecated Use `EntityValue` instead
+ */
+export type IEntityValue = EntityValue;
 
 export interface TypedData {
   type: string; // auto, text, ...
@@ -83,7 +93,7 @@ export interface Screen {
   /** Unique ID of the screen */
   id: string;
   /** The list of controls to be displayed on the screen */
-  controls: Control[];
+  controls: RenderableControl[];
 }
 
 export interface Progress {
