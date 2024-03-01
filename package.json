@@ -1,14 +1,14 @@
 {
   "name": "@decisively-io/types-interview",
-  "version": "0.2.0-alpha.6",
+  "version": "0.2.0",
   "description": "A type package for the Decisively interview system.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w",
     "transpileToDist": "rm -rf dist && tsc",
-    "prepublishOnly": "npm run check && yarn transpileToDist",
-    "check:fix": "tsc --noEmit --project tsconfig.json && npx @biomejs/biome check --apply-unsafe .",
+    "prepublishOnly": "npm run check:fix && yarn transpileToDist",
+    "check:fix": "tsc --noEmit --project tsconfig.json && npx @biomejs/biome check --apply .",
     "check": "tsc --noEmit --project tsconfig.json && npx @biomejs/biome check ."
   },
   "files": [

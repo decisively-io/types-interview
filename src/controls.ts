@@ -432,25 +432,18 @@ export interface ConditionalContainerControl<C = Control> extends BaseControl {
   controls: C[];
 }
 
-export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals";
+export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "plus" | "multiply" | "divide";
 
-export type ConditionValue = [
-  {
-    type: "attribute";
-    attributeId: string | null;
-  },
-  // the RHS of the condition can either be a literal value or an attribute
-  {
-    type: "value" | "attribute";
-    // one or the other, not both
-    value?: string | boolean | null;
-    attributeId?: string | null;
-  },
-];
+export interface ConditionValue {
+  type: "value" | "attribute" | "current-date";
+  // one or the other, not both
+  value?: string | boolean | null;
+  attributeId?: string | null;
+}
 
 export interface ConditionExpression {
   type: ConditionType;
-  elements: ConditionValue | ConditionExpression[];
+  elements: Array<ConditionValue | ConditionExpression>;
 }
 
 //#endregion
