@@ -6,6 +6,8 @@ interface BaseControl {
   attribute?: string;
 }
 
+// schema controls
+
 /**
  * A control to collect a true or false response from a user. Usually rendered as a checkbox.
  * Note: the control needs to allow for an indeterminate (or uncertain) response - i.e. the
@@ -375,7 +377,7 @@ export type ITypography = TypographyControl;
 /**
  * Collect information about instances (of an entity) within a tabular structure.
  */
-export interface EntityControl extends BaseControl {
+export interface EntityControl<C = Control> extends BaseControl {
   /** unique id of the control */
   id: string;
   type: "entity";
@@ -386,7 +388,7 @@ export interface EntityControl extends BaseControl {
   /** Should all the fields be vertical (like table columns) or horizontal (individual rows, table-like) */
   /** describes single 'row' of entries, each of which has all controls from `template` */
   display?: "horizontal" | "vertical";
-  template: Control[];
+  template: C[];
   value?: EntityValue[];
   /** min number of instances */
   min?: number;
@@ -417,25 +419,29 @@ export interface CertaintyContainerControl extends BaseControl {
   uncertain: Control[];
 }
 
-export interface SwitchContainerControl extends BaseControl {
+export interface SwitchContainerControl<C = Control> extends BaseControl {
   id: string;
   type: "switch_container";
-  outcome_true: Control[];
-  outcome_false: Control[];
+  outcome_true: C[];
+  outcome_false: C[];
   condition?: ConditionExpression;
+  kind?: "dynamic" | "static";
 }
 
-export interface ConditionalContainerControl<C = Control> extends BaseControl {
-  id: string;
-  type: "conditional_container";
-  condition?: ConditionExpression;
-  controls: C[];
+// renderable controls
+
+export type RenderableEntityControl = EntityControl<RenderableControl>;
+
+export interface RenderableSwitchContainerControl extends SwitchContainerControl<RenderableControl> {
+  branch?: "true" | "false";
 }
 
-export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "plus" | "multiply" | "divide";
+// conditions
+
+export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals";
 
 export interface ConditionValue {
-  type: "value" | "attribute" | "current-date";
+  type: "value" | "attribute";
   // one or the other, not both
   value?: string | boolean | null;
   attributeId?: string | null;
@@ -448,26 +454,14 @@ export interface ConditionExpression {
 
 //#endregion
 
-export type RenderableControl = BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | EntityControl | ConditionalContainerControl<RenderableControl>;
+export type RenderableControl = (BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | RenderableEntityControl | RenderableSwitchContainerControl) & {
+  loading?: boolean;
+  dynamicAttributes?: string[];
+};
 export type RenderableControlType = RenderableControl["type"];
 
-export type Control =
-  | BooleanControl
-  | CurrencyControl
-  | DateControl
-  | TimeControl
-  | DateTimeControl
-  | OptionsControl
-  | FileControl
-  | ImageControl
-  | NumberOfInstancesControl
-  | TextControl
-  | TypographyControl
-  | EntityControl
-  | RepeatingContainerControl
-  | CertaintyContainerControl
-  | SwitchContainerControl
-  | ConditionalContainerControl;
+export type Control = BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | EntityControl | RepeatingContainerControl | CertaintyContainerControl | SwitchContainerControl;
+export type ControlType = Control["type"];
 
 export interface ControlsValue {
   [controlUUID: string]: any;
