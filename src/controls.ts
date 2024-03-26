@@ -411,12 +411,12 @@ export interface RepeatingContainerControl extends BaseControl {
   controls: Control[];
 }
 
-export interface CertaintyContainerControl extends BaseControl {
+export interface CertaintyContainerControl<C = Control> extends BaseControl {
   id: string;
   type: "certainty_container";
   attribute: string;
-  certain: Control[];
-  uncertain: Control[];
+  certain: C[];
+  uncertain: C[];
 }
 
 export interface SwitchContainerControl<C = Control> extends BaseControl {
@@ -434,6 +434,10 @@ export type RenderableEntityControl = EntityControl<RenderableControl>;
 
 export interface RenderableSwitchContainerControl extends SwitchContainerControl<RenderableControl> {
   branch?: "true" | "false";
+}
+
+export interface RenderableCertaintyContainerControl extends CertaintyContainerControl<RenderableControl> {
+  branch?: "certain" | "uncertain";
 }
 
 // conditions
@@ -454,7 +458,22 @@ export interface ConditionExpression {
 
 //#endregion
 
-export type RenderableControl = (BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | RenderableEntityControl | RenderableSwitchContainerControl) & {
+export type RenderableControl = (
+  | BooleanControl
+  | CurrencyControl
+  | DateControl
+  | TimeControl
+  | DateTimeControl
+  | OptionsControl
+  | FileControl
+  | ImageControl
+  | NumberOfInstancesControl
+  | TextControl
+  | TypographyControl
+  | RenderableEntityControl
+  | RenderableSwitchContainerControl
+  | RenderableCertaintyContainerControl
+) & {
   loading?: boolean;
   dynamicAttributes?: string[];
 };

@@ -1,6 +1,6 @@
 {
   "name": "@decisively-io/types-interview",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A type package for the Decisively interview system.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,19 +11,13 @@
     "check:fix": "tsc --noEmit --project tsconfig.json && npx @biomejs/biome check --apply .",
     "check": "tsc --noEmit --project tsconfig.json && npx @biomejs/biome check ."
   },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "decisively",
-    "interview",
-    "types",
-    "typescript"
-  ],
+  "files": ["dist"],
+  "keywords": ["decisively", "interview", "types", "typescript"],
   "author": "Decisively",
   "license": "UNLICENSED",
   "devDependencies": {
-    "@biomejs/biome": "^1.5.3",
+    "@biomejs/biome": "^1.6.3",
+    "@imminently/standard": "^0.2.1",
     "typescript": "^4.9.5"
   }
 }

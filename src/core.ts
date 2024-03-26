@@ -1,4 +1,4 @@
-import { Control, RenderableControl } from "./controls";
+import { Control, type RenderableControl } from "./controls";
 
 export type StepId = string;
 export type ReleaseId = string;

@@ -2,24 +2,29 @@
 # yarn lockfile v1
 
 
-"@biomejs/biome@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.npmjs.org/@biomejs/biome/-/biome-1.5.3.tgz"
-  integrity sha512-yvZCa/g3akwTaAQ7PCwPWDCkZs3Qa5ONg/fgOUT9e6wAWsPftCjLQFPXBeGxPK30yZSSpgEmRCfpGTmVbUjGgg==
+"@biomejs/biome@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.npmjs.org/@biomejs/biome/-/biome-1.6.3.tgz"
+  integrity sha512-Xnp/TIpIcTnRA4LwerJuoGYQJEqwXtn5AL0U0OPXll/QGbAKmcUAfizU880xTwZRD4f53iceqODLDaD3wxYlIw==
   optionalDependencies:
-    "@biomejs/cli-darwin-arm64" "1.5.3"
-    "@biomejs/cli-darwin-x64" "1.5.3"
-    "@biomejs/cli-linux-arm64" "1.5.3"
-    "@biomejs/cli-linux-arm64-musl" "1.5.3"
-    "@biomejs/cli-linux-x64" "1.5.3"
-    "@biomejs/cli-linux-x64-musl" "1.5.3"
-    "@biomejs/cli-win32-arm64" "1.5.3"
-    "@biomejs/cli-win32-x64" "1.5.3"
+    "@biomejs/cli-darwin-arm64" "1.6.3"
+    "@biomejs/cli-darwin-x64" "1.6.3"
+    "@biomejs/cli-linux-arm64" "1.6.3"
+    "@biomejs/cli-linux-arm64-musl" "1.6.3"
+    "@biomejs/cli-linux-x64" "1.6.3"
+    "@biomejs/cli-linux-x64-musl" "1.6.3"
+    "@biomejs/cli-win32-arm64" "1.6.3"
+    "@biomejs/cli-win32-x64" "1.6.3"
 
-"@biomejs/cli-darwin-arm64@1.5.3":
-  version "1.5.3"
-  resolved "https://registry.npmjs.org/@biomejs/cli-darwin-arm64/-/cli-darwin-arm64-1.5.3.tgz"
-  integrity sha512-ImU7mh1HghEDyqNmxEZBoMPr8SxekkZuYcs+gynKlNW+TALQs7swkERiBLkG9NR0K1B3/2uVzlvYowXrmlW8hw==
+"@biomejs/cli-darwin-arm64@1.6.3":
+  version "1.6.3"
+  resolved "https://registry.npmjs.org/@biomejs/cli-darwin-arm64/-/cli-darwin-arm64-1.6.3.tgz"
+  integrity sha512-0E8PGu3/8HSkBJdtjno+niJE1ANS/12D7sPK65vw5lTBYmmaYwJdfclDp6XO0IAX7uVd3/YtXlsEua0SVrNt3Q==
+
+"@imminently/standard@^0.2.1":
+  version "0.2.1"
+  resolved "https://npm.pkg.github.com/download/@imminently/standard/0.2.1/f6a86a49f1c46c7c3d094bdd32927fc484e75c39"
+  integrity sha512-CI2CHfoeH6YWtJsE+zxdlf4sXIJBDxyaFO53OjTzk65zvgvZpLz9FcIJA/9M3ypkQfR2I4wDzCAZN6tfZrjAOg==
 
 typescript@^4.9.5:
   version "4.9.5"
