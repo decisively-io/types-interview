@@ -4,6 +4,7 @@ interface BaseControl {
   id: string;
   type: string;
   attribute?: string;
+  version?: number;
 }
 
 // schema controls
