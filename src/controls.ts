@@ -409,7 +409,12 @@ export interface RepeatingContainerControl extends BaseControl {
   id: string;
   type: "repeating_container";
   entity: string;
+  /** if `display` is `undefined` we should assume `"list"` */
   display?: "list" | "table";
+  /** `filter` is an attributeId */
+  filter?: string | null;
+  /** `sort` is an attributeId */
+  sort?: string | null;
   controls: Control[];
 }
 
