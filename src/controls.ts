@@ -409,6 +409,7 @@ export interface RepeatingContainerControl extends BaseControl {
   id: string;
   type: "repeating_container";
   entity: string;
+  display?: "list" | "table";
   controls: Control[];
 }
 
