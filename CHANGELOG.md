@@ -1,3 +1,8 @@
+## 0.4.0
+
+- rename `AttributeData` to `AttributeValues`
+- add `AttributeData` type
+
 ## 0.3.3
 
 - add `locale` to `Session` type

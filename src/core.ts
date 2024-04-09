@@ -11,13 +11,18 @@ export type AttributeValue = string | number | boolean | Record<string, Attribut
 /** Navigation can be step id, or true for next, false for no navigation */
 export type Navigate = StepId | boolean;
 
-export type AttributeData = Record<AttributeId, AttributeValue>;
+export interface AttributeData {
+  type: string; // auto, text, ...
+  value: AttributeValue;
+}
+
+export type AttributeValues = Record<AttributeId, AttributeValue>;
 
 export interface Parent {
   "@parent": string | undefined;
 }
 
-export type ResponseData = AttributeData & Parent;
+export type ResponseData = AttributeValues & Parent;
 
 export interface EntityInstance {
   "@id": string;
@@ -28,17 +33,12 @@ export interface EntityInstance {
  */
 export type IEntityInstance = EntityInstance;
 
-export type EntityValue = AttributeData & EntityInstance;
+export type EntityValue = AttributeValues & EntityInstance;
 
 /**
  * @deprecated Use `EntityValue` instead
  */
 export type IEntityValue = EntityValue;
-
-export interface TypedData {
-  type: string; // auto, text, ...
-  value: AttributeValue;
-}
 
 /** Defines the context that the attributes within the screen exist within (whether they belong to the global object, or a sub-entity) */
 export interface Context {
@@ -55,12 +55,13 @@ export interface Simulate {
   mode: "api";
   save: false;
   goal: AttributeId;
-  data: AttributeData;
+  data: AttributeValues;
 }
 
 /** The state attribute provides the values and additional information about attributes that will be displayed on the screen, but may require checking with the server for the latest information (aka: Dynamic Attributes). */
 export interface State {
   id: AttributeId;
+  type: string;
   // the backend will calculate the dependencies at runtime, so the runtime can monitor them and refresh the session
   dependencies?: AttributeId[];
   value?: any;
@@ -108,7 +109,7 @@ export interface Session {
   sessionId: string;
   status: "in-progress" | "complete" | "error";
   context: Context;
-  data: Record<AttributeId, TypedData> & Parent;
+  data: Record<AttributeId, AttributeData> & Parent;
   state?: State[];
   steps: Step[];
   screen: Screen;
