@@ -115,4 +115,5 @@ export interface Session {
   progress?: Progress;
   renderAt?: number; // indicator on whether a dynamic replacement has occurred,
   explanations?: Record<AttributeId, string>;
+  locale?: string;
 }

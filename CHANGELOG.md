@@ -1,3 +1,7 @@
+## 0.3.3
+
+- add `locale` to `Session` type
+
 ## 0.3.0
 
 - add support for dynamic containers
