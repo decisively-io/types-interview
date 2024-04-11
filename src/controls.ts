@@ -70,6 +70,26 @@ export interface CurrencyControl extends BaseControl {
 export type ICurrency = CurrencyControl;
 
 /**
+ * when we work with min/max/default date in an interview designer, \
+ * we have several possible values that can be assigned to these:
+ * - "now" literal value, which means "right now, this moment \
+ * of time", and this is used when we want to use the date\
+ * at which interview is being filled in by the user
+ * - "YYYY-MM-DD"-like string, i.e. date that is formatted using \
+ * this string and is exactly 10 characters long
+ * - "{{some attribute name}}" - a very special value, that \
+ * references another attribute in the graph. It must not have any\
+ * trailing or leading whitespaces, no whitespaces between left or\
+ * right bracket and the attribute, and have no | (which is an  \
+ * attribute format description, I believe). \
+ * **IMPORTANT** while this is a valid variant for interview designer\
+ * to input, we don't expect BE to respond with this exact value \
+ * when hydrating a Session for an interview runtime,\
+ * instead it will replace this value with "YYYY-MM-DD" formatted \
+ * string, that corresponds to referenced attribute.
+ */
+export type DateControlThreeVariantDate = string | "now";
+/**
  * Allow a user to enter a date. This should send an ISO date string back to the server ('YYYY-MM-DD').
  * Do not send a time component back.
  */
@@ -87,11 +107,11 @@ export interface DateControl extends BaseControl {
   /** 'YYYY-MM-DD' */
   value?: string | null;
   /** 'YYYY-MM-DD' */
-  default?: string;
-  /** Minimum date allowed, YYYY-MM-DD */
-  min?: string | "now";
-  /** Maximum date allowed, YYYY-MM-DD */
-  max?: string | "now";
+  default?: DateControlThreeVariantDate;
+  /** Minimum date allowed */
+  min?: DateControlThreeVariantDate;
+  /** Maximum date allowed */
+  max?: DateControlThreeVariantDate;
   showExplanation?: boolean;
 }
 
