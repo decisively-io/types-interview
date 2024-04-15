@@ -429,7 +429,7 @@ export type IEntity = EntityControl;
 
 //#region container
 
-export interface RepeatingContainerControl extends BaseControl {
+export interface RepeatingContainerControl<C = Control> extends BaseControl {
   id: string;
   type: "repeating_container";
   entity: string;
@@ -439,7 +439,7 @@ export interface RepeatingContainerControl extends BaseControl {
   filter?: string | null;
   /** `sort` is an attributeId */
   sort?: string | null;
-  controls: Control[];
+  controls: C[];
 }
 
 export interface CertaintyContainerControl<C = Control> extends BaseControl {
@@ -470,6 +470,8 @@ export interface RenderableSwitchContainerControl extends SwitchContainerControl
 export interface RenderableCertaintyContainerControl extends CertaintyContainerControl<RenderableControl> {
   branch?: "certain" | "uncertain";
 }
+
+export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {}
 
 // conditions
 
