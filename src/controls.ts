@@ -439,6 +439,10 @@ export interface RepeatingContainerControl<C = Control> extends BaseControl {
   filter?: string | null;
   /** `sort` is an attributeId */
   sort?: string | null;
+  /** `showBorders` is only relevant when `display` is `"table"` and is defaulted to `false` */
+  showBorders?: boolean;
+  /** indicates if this is the first instance of a repeating series (calculated at runtime) */
+  isFirst?: boolean;
   controls: C[];
 }
 
@@ -448,6 +452,10 @@ export interface CertaintyContainerControl<C = Control> extends BaseControl {
   attribute: string;
   certain: C[];
   uncertain: C[];
+  /** `columnHeading` is relevant only when nested within a repeat_container, and will otherwise be ignored */
+  columnHeading?: string;
+  /** `columnWidth` is relevant only when nested within a repeat_container, and will otherwise be ignored */
+  columnWidth?: number;
 }
 
 export interface SwitchContainerControl<C = Control> extends BaseControl {
@@ -457,6 +465,10 @@ export interface SwitchContainerControl<C = Control> extends BaseControl {
   outcome_false: C[];
   condition?: ConditionExpression;
   kind?: "dynamic" | "static";
+  /** `columnHeading` is relevant only when nested within a repeat_container, and will otherwise be ignored */
+  columnHeading?: string;
+  /** `columnWidth` is relevant only when nested within a repeat_container, and will otherwise be ignored */
+  columnWidth?: number;
 }
 
 // renderable controls
@@ -471,7 +483,8 @@ export interface RenderableCertaintyContainerControl extends CertaintyContainerC
   branch?: "certain" | "uncertain";
 }
 
-export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {}
+export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {
+}
 
 // conditions
 
@@ -506,6 +519,7 @@ export type RenderableControl = (
   | RenderableEntityControl
   | RenderableSwitchContainerControl
   | RenderableCertaintyContainerControl
+  | RenderableRepeatingContainerControl
 ) & {
   loading?: boolean;
   dynamicAttributes?: string[];
