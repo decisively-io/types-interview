@@ -435,12 +435,14 @@ export interface RepeatingContainerControl<C = Control> extends BaseControl {
   entity: string;
   /** if `display` is `undefined` we should assume `"list"` */
   display?: "list" | "table";
-  /** `filter` is an attributeId */
+  /** `filter` is an attributeId and is only relevant when `display` is `"table"` */
   filter?: string | null;
-  /** `sort` is an attributeId */
+  /** `sort` is an attributeId and is only relevant when `display` is `"table"` */
   sort?: string | null;
-  /** `showBorders` is only relevant when `display` is `"table"` and is defaulted to `false` */
+  /** `showBorders` is only relevant when `display` is `"table"` and is defaulted to `true` if not set */
   showBorders?: boolean;
+  /** `showHeaders` is only relevant when `display` is `"table"` and is defaulted to `true` if not set */
+  showHeaders?: boolean;
   /** indicates if this is the first instance of a repeating series (calculated at runtime) */
   isFirst?: boolean;
   controls: C[];
