@@ -445,6 +445,7 @@ export interface RepeatingContainerControl<C = Control> extends BaseControl {
   showHeaders?: boolean;
   /** indicates if this is the first instance of a repeating series (calculated at runtime) */
   isFirst?: boolean;
+  isLast?: boolean;
   controls: C[];
 }
 
