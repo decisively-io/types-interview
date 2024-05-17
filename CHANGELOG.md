@@ -1,3 +1,7 @@
+## 0.4.6
+
+- add `labelDisplay` to controls
+
 ## 0.4.0
 
 - rename `AttributeData` to `AttributeValues`
