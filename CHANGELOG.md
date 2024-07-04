@@ -1,3 +1,7 @@
+## 0.5.0
+
+- change typing of entity control
+
 ## 0.4.6
 
 - add `labelDisplay` to controls

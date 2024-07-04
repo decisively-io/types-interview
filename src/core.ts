@@ -65,6 +65,8 @@ export interface State {
   // the backend will calculate the dependencies at runtime, so the runtime can monitor them and refresh the session
   dependencies?: AttributeId[];
   value?: any;
+  // this state is a placeholder for an entity that doesn't exist yet and will include "@id" in its ID
+  instanceTemplate?: string;
 }
 
 export interface Step {

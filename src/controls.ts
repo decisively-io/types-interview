@@ -488,7 +488,14 @@ export interface SwitchContainerControl<C = Control> extends BaseControl {
 
 // renderable controls
 
-export type RenderableEntityControl = EntityControl<RenderableControl>;
+export interface EntityControlInstance {
+  id: string;
+  controls: RenderableControl[];
+}
+
+export interface RenderableEntityControl extends EntityControl<RenderableControl> {
+  instances: EntityControlInstance[];
+}
 
 export interface RenderableSwitchContainerControl extends SwitchContainerControl<RenderableControl> {
   branch?: "true" | "false";
