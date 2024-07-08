@@ -25,6 +25,7 @@ export interface BooleanControl extends BaseControl {
   type: "boolean";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -52,6 +53,7 @@ export interface CurrencyControl extends BaseControl {
   type: "currency";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -103,6 +105,7 @@ export interface DateControl extends BaseControl {
   type: "date";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -144,6 +147,7 @@ export interface TimeControl extends BaseControl {
   type: "time";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -186,6 +190,7 @@ export interface DateTimeControl extends BaseControl {
   type: "datetime";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -255,6 +260,7 @@ export interface OptionsControl extends BaseControl {
   asRadio?: true;
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -286,6 +292,7 @@ export interface FileControl extends BaseControl {
   type: "file";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   /** uuid */
@@ -339,6 +346,7 @@ export interface NumberOfInstancesControl extends BaseControl {
   type: "number_of_instances";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   default?: EntityInstance[];
@@ -366,6 +374,7 @@ export interface TextControl extends BaseControl {
   type: "text";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -419,6 +428,7 @@ export interface EntityControl<C = Control> extends BaseControl {
   type: "entity";
   label?: string;
   labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   /** The name of the entity */
   entity: string;
