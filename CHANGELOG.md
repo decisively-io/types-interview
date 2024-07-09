@@ -1,3 +1,11 @@
+## 0.5.0
+
+- change typing of entity control
+
+## 0.4.6
+
+- add `labelDisplay` to controls
+
 ## 0.4.0
 
 - rename `AttributeData` to `AttributeValues`

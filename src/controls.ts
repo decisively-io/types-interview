@@ -1,5 +1,7 @@
 import type { EntityInstance, EntityValue } from "./core";
 
+export type LabelDisplay = "automatic" | "separate" | "inline";
+
 interface BaseControl {
   id: string;
   type: string;
@@ -22,6 +24,8 @@ export interface BooleanControl extends BaseControl {
   id: string;
   type: "boolean";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -48,6 +52,8 @@ export interface CurrencyControl extends BaseControl {
   id: string;
   type: "currency";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -98,6 +104,8 @@ export interface DateControl extends BaseControl {
   id: string;
   type: "date";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -138,6 +146,8 @@ export interface TimeControl extends BaseControl {
   id: string;
   type: "time";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -179,6 +189,8 @@ export interface DateTimeControl extends BaseControl {
   id: string;
   type: "datetime";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -247,6 +259,8 @@ export interface OptionsControl extends BaseControl {
    */
   asRadio?: true;
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -277,6 +291,8 @@ export interface FileControl extends BaseControl {
   id: string;
   type: "file";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   /** uuid */
@@ -329,6 +345,8 @@ export interface NumberOfInstancesControl extends BaseControl {
   id: string;
   type: "number_of_instances";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   default?: EntityInstance[];
@@ -355,6 +373,8 @@ export interface TextControl extends BaseControl {
   id: string;
   type: "text";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   required?: true;
   disabled?: true;
@@ -427,6 +447,8 @@ export interface EntityControl<C = Control> extends BaseControl {
   id: string;
   type: "entity";
   label?: string;
+  labelDisplay?: LabelDisplay;
+  sxForSeparateLabel?: Record<string, unknown>;
   labelLength?: number;
   /** The name of the entity */
   entity: string;
@@ -496,7 +518,14 @@ export interface SwitchContainerControl<C = Control> extends BaseControl {
 
 // renderable controls
 
-export type RenderableEntityControl = EntityControl<RenderableControl>;
+export interface EntityControlInstance {
+  id: string;
+  controls: RenderableControl[];
+}
+
+export interface RenderableEntityControl extends EntityControl<RenderableControl> {
+  instances: EntityControlInstance[];
+}
 
 export interface RenderableSwitchContainerControl extends SwitchContainerControl<RenderableControl> {
   branch?: "true" | "false";

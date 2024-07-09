@@ -1,6 +1,6 @@
 {
   "name": "@decisively-io/types-interview",
-  "version": "0.4.7",
+  "version": "0.5.1",
   "description": "A type package for the Decisively interview system.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,8 +16,8 @@
   "author": "Decisively",
   "license": "UNLICENSED",
   "devDependencies": {
-    "@biomejs/biome": "^1.6.3",
-    "@imminently/standard": "^0.2.1",
+    "@biomejs/biome": "^1.8.3",
+    "@imminently/standard": "^0.2.3",
     "typescript": "^4.9.5"
   }
 }
