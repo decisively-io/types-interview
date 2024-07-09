@@ -378,6 +378,26 @@ export interface TextControl extends BaseControl {
 export type IText = TextControl;
 
 /**
+ * Denotes when documentation should be supplied/uploaded
+ */
+export interface DocumentControl extends BaseControl {
+  id: string;
+  type: "document";
+  label?: string;
+  attribute: string;
+  required?: boolean;
+  disabled?: true;
+  maxSizeBytes?: number;
+  /**
+   * we'll manipulate these together, but it's easier if they are defined separately,
+   * as one mime type can have multiple extensions, and one extension can have multiple mime types
+   * e.g.
+   */
+  allowedMimeTypes?: string[];
+  allowedExtensions?: string[];
+}
+
+/**
  * Display text to the user. This differs from the text control above, \
  * which collects text from the user.\
  * The end-styling of the text is up to the run time.
@@ -486,8 +506,7 @@ export interface RenderableCertaintyContainerControl extends CertaintyContainerC
   branch?: "certain" | "uncertain";
 }
 
-export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {
-}
+export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {}
 
 // conditions
 
@@ -519,6 +538,7 @@ export type RenderableControl = (
   | NumberOfInstancesControl
   | TextControl
   | TypographyControl
+  | DocumentControl
   | RenderableEntityControl
   | RenderableSwitchContainerControl
   | RenderableCertaintyContainerControl
@@ -529,7 +549,23 @@ export type RenderableControl = (
 };
 export type RenderableControlType = RenderableControl["type"];
 
-export type Control = BooleanControl | CurrencyControl | DateControl | TimeControl | DateTimeControl | OptionsControl | FileControl | ImageControl | NumberOfInstancesControl | TextControl | TypographyControl | EntityControl | RepeatingContainerControl | CertaintyContainerControl | SwitchContainerControl;
+export type Control =
+  | BooleanControl
+  | CurrencyControl
+  | DateControl
+  | TimeControl
+  | DateTimeControl
+  | OptionsControl
+  | FileControl
+  | ImageControl
+  | NumberOfInstancesControl
+  | TextControl
+  | TypographyControl
+  | DocumentControl
+  | EntityControl
+  | RepeatingContainerControl
+  | CertaintyContainerControl
+  | SwitchContainerControl;
 export type ControlType = Control["type"];
 
 export interface ControlsValue {
