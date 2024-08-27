@@ -34,6 +34,7 @@ export interface BooleanControl extends BaseControl {
   // The GUID of the attribute
   attribute: string;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -68,6 +69,7 @@ export interface CurrencyControl extends BaseControl {
   /** Maximum number allowed - if not set assume no restriction */
   max?: number;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -121,6 +123,7 @@ export interface DateControl extends BaseControl {
   /** Maximum date allowed */
   max?: DateControlThreeVariantDate;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -170,6 +173,7 @@ export interface TimeControl extends BaseControl {
   minutes_increment?: number;
   allowSeconds?: true;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -217,6 +221,7 @@ export interface DateTimeControl extends BaseControl {
   /** mui picker doesn't have this control */
   // allow_seconds?: true;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -275,6 +280,7 @@ export interface OptionsControl extends BaseControl {
   /** uuid, design time only */
   enum_id?: string;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -360,6 +366,7 @@ export interface NumberOfInstancesControl extends BaseControl {
    */
   min?: number;
   max?: number;
+  readOnly?: boolean;
 }
 
 /**
@@ -390,6 +397,7 @@ export interface TextControl extends BaseControl {
     minRows?: number;
   };
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
