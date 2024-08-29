@@ -524,6 +524,14 @@ export interface SwitchContainerControl<C = Control> extends BaseControl {
   columnWidth?: number;
 }
 
+export interface DataContainerControl<C = Control> extends BaseControl {
+  id: string;
+  type: "data_container";
+  label: string;
+  columns: number;
+  controls: C[];
+}
+
 // renderable controls
 
 export interface EntityControlInstance {
@@ -602,7 +610,8 @@ export type Control =
   | EntityControl
   | RepeatingContainerControl
   | CertaintyContainerControl
-  | SwitchContainerControl;
+  | SwitchContainerControl
+  | DataContainerControl;
 export type ControlType = Control["type"];
 
 export interface ControlsValue {
