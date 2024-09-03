@@ -553,6 +553,8 @@ export interface RenderableCertaintyContainerControl extends CertaintyContainerC
 
 export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {}
 
+export interface RenderableDataContainerControl extends DataContainerControl<RenderableControl> {}
+
 // conditions
 
 export type ConditionType = "equals" | "not-equals" | "and" | "or" | "less-than" | "less-than-equals" | "greater-than" | "greater-than-equals";
@@ -588,6 +590,7 @@ export type RenderableControl = (
   | RenderableSwitchContainerControl
   | RenderableCertaintyContainerControl
   | RenderableRepeatingContainerControl
+  | RenderableDataContainerControl
 ) & {
   loading?: boolean;
   dynamicAttributes?: string[];
