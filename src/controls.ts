@@ -1,4 +1,4 @@
-import type { EntityInstance, EntityValue } from "./core";
+import type { EntityInstance, EntityValue, FileAttributeValue } from "./core";
 
 export type LabelDisplay = "automatic" | "separate" | "inline";
 
@@ -303,10 +303,11 @@ export interface FileControl extends BaseControl {
   required?: true;
   /** uuid */
   attribute: string;
+  value?: FileAttributeValue["value"] | null;
   /** The max number of files that can be uploaded. Defaults to 1 */
   max?: number;
   /** The types of file allowed (pdf docx etc) */
-  file_type?: string;
+  file_type?: string[];
   /** The maximum size of a document, in Mb */
   max_size?: number;
   showExplanation?: boolean;
