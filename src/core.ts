@@ -6,7 +6,32 @@ export type ProjectId = string;
 export type SessionId = string;
 export type InterviewId = string;
 export type AttributeId = string;
-export type AttributeValue = string | number | boolean | Record<string, AttributeValue>[];
+
+export type FileAttributeValue = {
+  type: "file";
+  /**
+   * `id` is a ref identifier in file storage\
+   * value after "base64" is a file name
+   *
+   * @example
+   *  [
+   *    "data:id=53eefeab-b0a4-40de-83d5-7eb063c909d2;base64,qweasdzxc",
+   *    "data:id=6bbf79d2-6e84-49cc-9473-3bc3c3dfbcc1;base64,iuytrew"
+   *  ]
+   */
+  value: string[];
+};
+export const isFileAttributeValue = (v: unknown): v is FileAttributeValue => {
+  if (typeof v !== "object" || v === null) return false;
+
+  const typed = v as FileAttributeValue;
+  if (typed.type !== "file" || Array.isArray(typed.value) === false) return false;
+  if (typed.value.some((it) => it.indexOf("data:id=") !== 0)) return false;
+
+  return true;
+};
+
+export type AttributeValue = string | number | boolean | FileAttributeValue | Record<string, AttributeValue>[];
 
 /** Navigation can be step id, or true for next, false for no navigation */
 export type Navigate = StepId | boolean;

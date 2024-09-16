@@ -1,4 +1,4 @@
-import type { EntityInstance, EntityValue } from "./core";
+import type { EntityInstance, EntityValue, FileAttributeValue } from "./core";
 
 export type LabelDisplay = "automatic" | "separate" | "inline";
 
@@ -34,6 +34,7 @@ export interface BooleanControl extends BaseControl {
   // The GUID of the attribute
   attribute: string;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -68,6 +69,7 @@ export interface CurrencyControl extends BaseControl {
   /** Maximum number allowed - if not set assume no restriction */
   max?: number;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -121,6 +123,7 @@ export interface DateControl extends BaseControl {
   /** Maximum date allowed */
   max?: DateControlThreeVariantDate;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -170,6 +173,7 @@ export interface TimeControl extends BaseControl {
   minutes_increment?: number;
   allowSeconds?: true;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -217,6 +221,7 @@ export interface DateTimeControl extends BaseControl {
   /** mui picker doesn't have this control */
   // allow_seconds?: true;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -275,6 +280,7 @@ export interface OptionsControl extends BaseControl {
   /** uuid, design time only */
   enum_id?: string;
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -297,10 +303,11 @@ export interface FileControl extends BaseControl {
   required?: true;
   /** uuid */
   attribute: string;
+  value?: FileAttributeValue["value"] | null;
   /** The max number of files that can be uploaded. Defaults to 1 */
   max?: number;
   /** The types of file allowed (pdf docx etc) */
-  file_type?: string;
+  file_type?: string[];
   /** The maximum size of a document, in Mb */
   max_size?: number;
   showExplanation?: boolean;
@@ -360,6 +367,7 @@ export interface NumberOfInstancesControl extends BaseControl {
    */
   min?: number;
   max?: number;
+  readOnly?: boolean;
 }
 
 /**
@@ -390,6 +398,7 @@ export interface TextControl extends BaseControl {
     minRows?: number;
   };
   showExplanation?: boolean;
+  readOnly?: boolean;
 }
 
 /**
@@ -516,6 +525,14 @@ export interface SwitchContainerControl<C = Control> extends BaseControl {
   columnWidth?: number;
 }
 
+export interface DataContainerControl<C = Control> extends BaseControl {
+  id: string;
+  type: "data_container";
+  label: string;
+  columns: number;
+  controls: C[];
+}
+
 // renderable controls
 
 export interface EntityControlInstance {
@@ -536,6 +553,8 @@ export interface RenderableCertaintyContainerControl extends CertaintyContainerC
 }
 
 export interface RenderableRepeatingContainerControl extends RepeatingContainerControl<RenderableControl> {}
+
+export interface RenderableDataContainerControl extends DataContainerControl<RenderableControl> {}
 
 // conditions
 
@@ -572,6 +591,7 @@ export type RenderableControl = (
   | RenderableSwitchContainerControl
   | RenderableCertaintyContainerControl
   | RenderableRepeatingContainerControl
+  | RenderableDataContainerControl
 ) & {
   loading?: boolean;
   dynamicAttributes?: string[];
@@ -594,7 +614,8 @@ export type Control =
   | EntityControl
   | RepeatingContainerControl
   | CertaintyContainerControl
-  | SwitchContainerControl;
+  | SwitchContainerControl
+  | DataContainerControl;
 export type ControlType = Control["type"];
 
 export interface ControlsValue {
