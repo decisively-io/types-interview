@@ -1,3 +1,5 @@
+# DEPRECATED: Types now live in `@decisively-io/interview-sdk`
+
 # Decisively Interview Types
 
 A package containing all types for the Decisively interview system.
